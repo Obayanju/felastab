@@ -8,29 +8,29 @@ import (
 
 func TestNextToken(t *testing.T) {
 	input := `
-		let five = 5;
-		let ten = 10;
-		let add = function(x,y) {
+		var five = 5;
+		var ten = 10;
+		var add = function(x,y) {
 			x + y;	
 		}
-		let result = add(five, ten);
+		var result = add(five, ten);
 	`
 
 	tests := []struct {
 		expectedType    token.TokenType
 		expectedLiteral string
 	}{
-		{token.LET, "let"},
+		{token.VAR, "var"},
 		{token.IDENT, "five"},
 		{token.ASSIGN, "="},
 		{token.INT, "5"},
 		{token.SEMICOLON, ";"},
-		{token.LET, "let"},
+		{token.VAR, "var"},
 		{token.IDENT, "ten"},
 		{token.ASSIGN, "="},
 		{token.INT, "10"},
 		{token.SEMICOLON, ";"},
-		{token.LET, "let"},
+		{token.VAR, "var"},
 		{token.IDENT, "add"},
 		{token.ASSIGN, "="},
 		{token.FUNCTION, "function"},
@@ -45,8 +45,7 @@ func TestNextToken(t *testing.T) {
 		{token.IDENT, "y"},
 		{token.SEMICOLON, ";"},
 		{token.RBRACE, "}"},
-		{token.SEMICOLON, ";"},
-		{token.LET, "let"},
+		{token.VAR, "var"},
 		{token.IDENT, "result"},
 		{token.ASSIGN, "="},
 		{token.IDENT, "add"},
@@ -56,13 +55,14 @@ func TestNextToken(t *testing.T) {
 		{token.IDENT, "ten"},
 		{token.RPAREN, ")"},
 		{token.SEMICOLON, ";"},
+		{token.EOF, ""},
 	}
 
 	l := New(input)
 
 	for i, tt := range tests {
 		tok := l.NextToken()
-
+		// fmt.Printf("token is %q | %q - expected is %q | %q \n", tok.Type, tok.Literal, tt.expectedType, tt.expectedLiteral)
 		if tok.Type != tt.expectedType {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
 				i, tt.expectedType, tok.Type)
