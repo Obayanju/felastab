@@ -1,3 +1,3 @@
-# felastab
+# Felastab (In Progress)
 
-## Lexer - Transforms source code into tokens
+An application to search a large JavaScript codebase
