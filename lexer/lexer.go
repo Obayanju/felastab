@@ -1,8 +1,6 @@
 package lexer
 
 import (
-	"fmt"
-
 	"github.com/obayanju/felastab/token"
 )
 
@@ -80,12 +78,12 @@ func (l *Lexer) NextToken() token.Token {
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
-			fmt.Printf("Token literal -> %v | Token tyype -> %v\n", tok.Literal, tok.Type)
+			//fmt.Printf("Token literal -> %v", tok.Literal)
 			return tok
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT
 			tok.Literal = l.readNumber()
-			fmt.Printf("Token literal -> %v | Token tyype -> %v\n", tok.Literal, tok.Type)
+			//fmt.Printf("Token literal -> %v", tok.Literal)
 			return tok
 		} else {
 			tok = newToken(token.ILLEGAL, l.ch)
@@ -93,7 +91,7 @@ func (l *Lexer) NextToken() token.Token {
 	}
 
 	l.readChar()
-	fmt.Printf("Token literal -> %v | Token tyype -> %v\n", tok.Literal, tok.Type)
+	//fmt.Printf("Token literal -> %v", tok.Literal)
 	return tok
 }
 
