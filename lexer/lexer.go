@@ -1,10 +1,15 @@
 package lexer
 
-import "github.com/obayanju/felastab/token"
+import (
+	"fmt"
+
+	"github.com/obayanju/felastab/token"
+)
 
 // The Lexer takes in source code as input and outputs
 // the tokens that represents the source code
 
+// Lexer structure
 type Lexer struct {
 	input        string
 	position     int  // current position in input (points to current char)
@@ -12,12 +17,14 @@ type Lexer struct {
 	ch           byte // current char under examination
 }
 
+// New instance of Lexer
 func New(input string) *Lexer {
 	l := &Lexer{input: input}
 	l.readChar()
 	return l
 }
 
+// NextToken returns the next token
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
@@ -73,10 +80,12 @@ func (l *Lexer) NextToken() token.Token {
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
+			fmt.Printf("Token literal -> %v | Token tyype -> %v\n", tok.Literal, tok.Type)
 			return tok
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT
 			tok.Literal = l.readNumber()
+			fmt.Printf("Token literal -> %v | Token tyype -> %v\n", tok.Literal, tok.Type)
 			return tok
 		} else {
 			tok = newToken(token.ILLEGAL, l.ch)
@@ -84,6 +93,7 @@ func (l *Lexer) NextToken() token.Token {
 	}
 
 	l.readChar()
+	fmt.Printf("Token literal -> %v | Token tyype -> %v\n", tok.Literal, tok.Type)
 	return tok
 }
 
@@ -117,15 +127,14 @@ func (l *Lexer) readChar() {
 		l.ch = l.input[l.readPosition]
 	}
 	l.position = l.readPosition
-	l.readPosition += 1
+	l.readPosition++
 }
 
 func (l *Lexer) peekChar() byte {
 	if l.readPosition >= len(l.input) {
 		return 0
-	} else {
-		return l.input[l.readPosition]
 	}
+	return l.input[l.readPosition]
 }
 
 func isLetter(ch byte) bool {

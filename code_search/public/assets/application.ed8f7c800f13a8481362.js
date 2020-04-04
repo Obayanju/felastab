@@ -100,7 +100,7 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./asse
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(/*! expose-loader?$!expose-loader?jQuery!jquery */ \"./node_modules/expose-loader/index.js?$!./node_modules/expose-loader/index.js?jQuery!./node_modules/jquery/dist/jquery.js-exposed\");\n\n__webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle.js */ \"./node_modules/bootstrap/dist/js/bootstrap.bundle.js\");\n\n$(function () {});\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js-exposed\")))\n\n//# sourceURL=webpack:///./assets/js/application.js?");
+eval("/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(/*! expose-loader?$!expose-loader?jQuery!jquery */ \"./node_modules/expose-loader/index.js?$!./node_modules/expose-loader/index.js?jQuery!./node_modules/jquery/dist/jquery.js-exposed\");\n\n__webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle.js */ \"./node_modules/bootstrap/dist/js/bootstrap.bundle.js\");\n\nvar processCodeBtn = document.querySelector(\"#process-code\");\n\nprocessCodeBtn.onclick = function () {\n  // send javascript code over to Go interpreter somehow\n  var codeArea = $('textarea#code-area').val();\n  console.log(codeArea);\n};\n\n$(function () {\n  console.log(\"webpage has loaded\");\n});\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js-exposed\")))\n\n//# sourceURL=webpack:///./assets/js/application.js?");
 
 /***/ }),
 
@@ -116,9 +116,9 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {/*!\n  * Bootstrap v4.3.1 (h
 /***/ }),
 
 /***/ "./node_modules/expose-loader/index.js?$!./node_modules/expose-loader/index.js?jQuery!./node_modules/jquery/dist/jquery.js-exposed":
-/*!***********************************************************************************************************************!*\
-  !*** ./node_modules/expose-loader?$!./node_modules/expose-loader?jQuery!./node_modules/jquery/dist/jquery.js-exposed ***!
-  \***********************************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/expose-loader?$!./node_modules/expose-loader?jQuery!./node_modules/jquery/dist/jquery.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

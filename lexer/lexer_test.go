@@ -11,7 +11,7 @@ func TestNextToken(t *testing.T) {
 		var five = 5;
 		var ten = 10;
 		var add = function(x,y) {
-			x + y;	
+			x + y;
 		}
 		var result = add(five, ten);
 	`
@@ -60,17 +60,16 @@ func TestNextToken(t *testing.T) {
 
 	l := New(input)
 
-	for i, tt := range tests {
+	for i, test := range tests {
 		tok := l.NextToken()
-		// fmt.Printf("token is %q | %q - expected is %q | %q \n", tok.Type, tok.Literal, tt.expectedType, tt.expectedLiteral)
-		if tok.Type != tt.expectedType {
+		if tok.Type != test.expectedType {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
-				i, tt.expectedType, tok.Type)
+				i, test.expectedType, tok.Type)
 		}
 
-		if tok.Literal != tt.expectedLiteral {
+		if tok.Literal != test.expectedLiteral {
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
-				i, tt.expectedLiteral, tok.Literal)
+				i, test.expectedLiteral, tok.Literal)
 		}
 	}
 }

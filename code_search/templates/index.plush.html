@@ -1,8 +1,8 @@
 <div class="container">
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Paste a JavaScript code</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    <button type="button" class="btn btn-primary row">Process code</button>
+    <textarea class="form-control" id="" rows="3"></textarea>
+    <button type="button" id="process-code" class="btn btn-primary row">Process code</button>
   </div>
 </div>
 
@@ -15,7 +15,8 @@
       <div class="col-md-9 col-sm-9 col-xs-10 titles">
         <h1><%= t("welcome_greeting") %></h1>
         <h2>
-          <a href="https://github.com/gobuffalo/buffalo"><i class="fab fa-github" aria-hidden="true"></i> https://github.com/gobuffalo/buffalo</a>
+          <a href="https://github.com/gobuffalo/buffalo"><i class="fab fa-github" aria-hidden="true"></i>
+            https://github.com/gobuffalo/buffalo</a>
         </h2>
         <h2 class="documentation">
           <a href="http://gobuffalo.io/"><i class="fa fa-book" aria-hidden="true"></i> Documentation</a>
@@ -46,22 +47,22 @@
         <tbody>
 
           <%= for (r) in routes { %>
-            <tr>
-              <td class="centered">
-                <%= r.Method %>
-              </td>
-              <td>
-                <%= if (r.Method != "GET" || r.Path ~= "{") {
+          <tr>
+            <td class="centered">
+              <%= r.Method %>
+            </td>
+            <td>
+              <%= if (r.Method != "GET" || r.Path ~= "{") {
                   return r.Path
                 } else {
                   return linkTo(r.Path, {body: r.Path})
                 } %>
-              </td>
-              <td>
-                <%= r.PathName %>
-              </td>
-              <td><code><%= r.HandlerName %></code></td>
-            </tr>
+            </td>
+            <td>
+              <%= r.PathName %>
+            </td>
+            <td><code><%= r.HandlerName %></code></td>
+          </tr>
           <% } %>
 
         </tbody>
