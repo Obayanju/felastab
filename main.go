@@ -28,16 +28,17 @@ func main() {
 			log.Fatal(err)
 		}
 		tokens := []string{}
-		err := search.Start(codeData.Code, &tokens)
-		if err != nil {
-			log.Fatalf("Lexing failed -> %v", err)
-		}
+		search.Start(codeData.Code, &tokens)
+		//if err != nil {
+		//	log.Fatalf("Lexing failed -> %v", err)
+		//}
 		response := Response{}
 		for _, token := range tokens {
 			response.data = append(response.data, token)
 		}
 		toks, _ := jsoniter.Marshal(response.data)
-		c.Write(toks)
+		//fmt.Print(string(toks))
+		c.Write(string(toks))
 	})
 
 	app.Listen(3000)

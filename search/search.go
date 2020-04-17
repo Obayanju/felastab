@@ -1,24 +1,27 @@
 package search
 
 import (
-	"io"
+	"bufio"
+	"fmt"
 	"strings"
 
 	"github.com/obayanju/felastab/lexer"
 	"github.com/obayanju/felastab/token"
 )
 
-func Start(in string, tokens *[]string) error {
-	r := strings.NewReader(in)
-	b := make([]byte, 1)
+func Start(in string, tokens *[]string) {
+	scanner := bufio.NewScanner(strings.NewReader(in))
 	for {
-		_, err := r.Read(b)
-		if err == io.EOF {
-			return nil
+		scanned := scanner.Scan()
+		if !scanned {
+			return
 		}
-		l := lexer.New(string(b[0]))
+
+		line := scanner.Text()
+		l := lexer.New(line)
 
 		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
+			fmt.Printf("%+v\n", tok)
 			*tokens = append(*tokens, "Token: "+string(tok.Type)+" Literal: "+tok.Literal)
 		}
 
