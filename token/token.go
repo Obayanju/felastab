@@ -47,8 +47,9 @@ const (
 )
 
 type Token struct {
-	Type    TokenType
-	Literal string
+	Type       TokenType
+	Literal    string
+	LineNumber int
 }
 
 var keywords = map[string]TokenType{

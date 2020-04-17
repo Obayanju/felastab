@@ -11,19 +11,20 @@ import (
 
 func Start(in string, tokens *[]string) {
 	scanner := bufio.NewScanner(strings.NewReader(in))
-	for {
-		scanned := scanner.Scan()
-		if !scanned {
-			return
-		}
-
-		line := scanner.Text()
-		l := lexer.New(line)
-
+	scanner.Split(bufio.ScanLines)
+	lineNum := 1
+	for scanner.Scan() {
+		l := lexer.New(scanner.Text())
 		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-			fmt.Printf("%+v\n", tok)
-			*tokens = append(*tokens, "Token: "+string(tok.Type)+" Literal: "+tok.Literal)
+			tok.LineNumber = lineNum
+			s := "Token -> " + string(tok.Type) + " Literal -> " + tok.Literal
+			detail := fmt.Sprintf("%d: %s", tok.LineNumber, s)
+			*tokens = append(*tokens, detail)
 		}
+		lineNum++
 
+	}
+	if scanner.Err() != nil {
+		fmt.Println(scanner.Err())
 	}
 }

@@ -27,7 +27,6 @@ func New(input string) *Lexer {
 // NextToken returns the next token
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
-
 	l.skipWhitespace()
 
 	switch l.ch {
@@ -80,12 +79,12 @@ func (l *Lexer) NextToken() token.Token {
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
-			fmt.Printf("Token literal -> %v", tok.Literal)
+			//fmt.Printf("Token literal -> %v", tok.Literal)
 			return tok
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT
 			tok.Literal = l.readNumber()
-			fmt.Printf("Token literal -> %v", tok.Literal)
+			//fmt.Printf("Token literal -> %v", tok.Literal)
 			return tok
 		} else {
 			tok = newToken(token.ILLEGAL, l.ch)
@@ -116,6 +115,9 @@ func (l *Lexer) readNumber() string {
 
 func (l *Lexer) skipWhitespace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
+		if l.ch != ' ' {
+			fmt.Print("whitespace\n")
+		}
 		l.readChar()
 	}
 }

@@ -29,15 +29,11 @@ func main() {
 		}
 		tokens := []string{}
 		search.Start(codeData.Code, &tokens)
-		//if err != nil {
-		//	log.Fatalf("Lexing failed -> %v", err)
-		//}
 		response := Response{}
 		for _, token := range tokens {
 			response.data = append(response.data, token)
 		}
 		toks, _ := jsoniter.Marshal(response.data)
-		//fmt.Print(string(toks))
 		c.Write(string(toks))
 	})
 
