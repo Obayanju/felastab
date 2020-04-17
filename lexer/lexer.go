@@ -1,8 +1,6 @@
 package lexer
 
 import (
-	"fmt"
-
 	"github.com/obayanju/felastab/token"
 )
 
@@ -115,9 +113,6 @@ func (l *Lexer) readNumber() string {
 
 func (l *Lexer) skipWhitespace() {
 	for l.ch == ' ' || l.ch == '\t' || l.ch == '\n' || l.ch == '\r' {
-		if l.ch != ' ' {
-			fmt.Print("whitespace\n")
-		}
 		l.readChar()
 	}
 }

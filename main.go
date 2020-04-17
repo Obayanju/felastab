@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gofiber/cors"
@@ -11,7 +12,8 @@ import (
 
 func main() {
 	type CodeData struct {
-		Code string
+		Code     string
+		FilePath string
 	}
 
 	type Response struct {
@@ -22,13 +24,14 @@ func main() {
 
 	app.Use(cors.New())
 
-	app.Post("/", func(c *fiber.Ctx) {
+	app.Post("/parse", func(c *fiber.Ctx) {
 		var codeData CodeData
+		fmt.Println("parse request")
 		if err := c.BodyParser(&codeData); err != nil {
 			log.Fatal(err)
 		}
 		tokens := []string{}
-		search.Start(codeData.Code, &tokens)
+		search.Start(codeData.Code, &tokens, codeData.FilePath)
 		response := Response{}
 		for _, token := range tokens {
 			response.data = append(response.data, token)

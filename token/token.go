@@ -50,6 +50,7 @@ type Token struct {
 	Type       TokenType
 	Literal    string
 	LineNumber int
+	FilePath   string
 }
 
 var keywords = map[string]TokenType{
