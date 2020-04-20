@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/fiber"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/obayanju/felastab/search"
+	"github.com/obayanju/felastab/token"
 )
 
 func main() {
@@ -17,7 +18,7 @@ func main() {
 	}
 
 	type Response struct {
-		data []string
+		data []token.Token
 	}
 
 	app := fiber.New()
@@ -30,7 +31,7 @@ func main() {
 		if err := c.BodyParser(&codeData); err != nil {
 			log.Fatal(err)
 		}
-		tokens := []string{}
+		tokens := []token.Token{}
 		search.Start(codeData.Code, &tokens, codeData.FilePath)
 		response := Response{}
 		for _, token := range tokens {

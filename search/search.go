@@ -9,7 +9,7 @@ import (
 	"github.com/obayanju/felastab/token"
 )
 
-func Start(in string, tokens *[]string, filePath string) {
+func Start(in string, tokens *[]token.Token, filePath string) {
 	scanner := bufio.NewScanner(strings.NewReader(in))
 	scanner.Split(bufio.ScanLines)
 	lineNum := 1
@@ -17,12 +17,14 @@ func Start(in string, tokens *[]string, filePath string) {
 		fmt.Println(lineNum)
 		l := lexer.New(scanner.Text())
 		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-			tok.LineNumber = lineNum
-			tok.FilePath = filePath
-			s := fmt.Sprintf("%s", tok.FilePath+" Token -> "+string(tok.Type)+" Literal -> "+tok.Literal)
-			detail := fmt.Sprintf("%d: %s", tok.LineNumber, s)
-			*tokens = append(*tokens, detail)
-			fmt.Println(detail)
+			if tok.Type == "IDENT" {
+				tok.LineNumber = lineNum
+				tok.FilePath = filePath
+				s := fmt.Sprintf("%s", tok.FilePath+" Token -> "+string(tok.Type)+" Literal -> "+tok.Literal)
+				detail := fmt.Sprintf("%d: %s", tok.LineNumber, s)
+				*tokens = append(*tokens, tok)
+				fmt.Println(detail)
+			}
 		}
 		lineNum++
 
